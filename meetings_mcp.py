@@ -4,18 +4,19 @@
 Exposes the finished transcripts (Whisper text, speaker labeled by
 pyannote) as read-only tools any MCP-capable model can call.
 
-Run (stdio):  python server.py
+Run (stdio):  meetings-mcp
 Wire into Claude Code:
-  claude mcp add meetings -- /path/to/.venv/bin/python /path/to/server.py
+  claude mcp add meetings -- meetings-mcp
 """
 
+import os
 import re
 from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
-DATA_DIR = Path.home() / "aiProjects/transcript/transcripts"
+DATA_DIR = Path(os.environ.get("MEETINGS_DATA_DIR", Path.home() / "aiProjects/transcript/transcripts"))
 
 PAGE = 25
 HEADER = re.compile(r"^\[(\d\d:\d\d:\d\d)\] (.+):$")
@@ -146,5 +147,9 @@ def search_transcripts(query: str) -> str:
             + "\n".join(hits[:PAGE]) + extra)
 
 
-if __name__ == "__main__":
+def main():
     server.run()
+
+
+if __name__ == "__main__":
+    main()

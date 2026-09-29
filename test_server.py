@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 
-import server
+import meetings_mcp as server
 
 
 def test_tools():

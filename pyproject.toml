@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meetings-mcp"
+version = "1.0.1"
+description = "MCP server over speaker labeled meeting transcripts: three read-only tools to list, page through and search them"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Al Amin Bashir Afara"}]
+requires-python = ">=3.10"
+dependencies = ["mcp"]
+keywords = ["mcp", "meetings", "transcripts", "transcription", "speaker-diarization", "search"]
+
+[project.urls]
+Homepage = "https://github.com/aminafara123/meetings-mcp"
+Repository = "https://github.com/aminafara123/meetings-mcp"
+
+[project.scripts]
+meetings-mcp = "meetings_mcp:main"
+
+[tool.setuptools]
+py-modules = ["meetings_mcp"]

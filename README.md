@@ -15,6 +15,12 @@ The pipeline turns a recording into a long text file. Thats useful, but nobody r
 ## Setup
 
 ```bash
+pipx install meetings-mcp
+```
+
+`uvx meetings-mcp` works too if you prefer no install. Hacking on a clone instead:
+
+```bash
 python3 -m venv .venv
 .venv/bin/pip install mcp
 ```
@@ -22,7 +28,13 @@ python3 -m venv .venv
 Wire it into Claude Code:
 
 ```bash
-claude mcp add meetings -- /path/to/meetings-mcp/.venv/bin/python /path/to/meetings-mcp/server.py
+claude mcp add meetings -- meetings-mcp
+```
+
+Running from a clone, point it at the venv instead:
+
+```bash
+claude mcp add meetings -- /path/to/meetings-mcp/.venv/bin/python /path/to/meetings-mcp/meetings_mcp.py
 ```
 
 ## Demo
@@ -61,7 +73,7 @@ The meetings above are demo data. The format is exactly what the server returns.
 
 ## Honest notes
 
-- It reads the pipeline's `transcripts/` folder, one `.speakers.txt` per meeting, falling back to the raw Whisper `.txt` when diarization hasnt run. You need to run the pipeline first. `DATA_DIR` at the top of `server.py` points at my local copy, change it for yours.
+- It reads the pipeline's `transcripts/` folder, one `.speakers.txt` per meeting, falling back to the raw Whisper `.txt` when diarization hasnt run. You need to run the pipeline first. The default path is my local copy. Point `MEETINGS_DATA_DIR` at your own data folder.
 - The redaction is pattern based. It catches speaker labels, emails, phone numbers and paths, but a name spoken inside a sentence still comes through as said.
 - Search is a plain substring match, so an Arabic query has to match the spelling Whisper produced.
 - The logic is tested against synthetic transcripts in `test_server.py`. Run `python test_server.py`.
