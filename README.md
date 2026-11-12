@@ -1,5 +1,7 @@
 # meetings-mcp
 
+<!-- mcp-name: io.github.aminafara123/meetings-mcp -->
+
 An MCP server over the output of my [meeting-transcription-pipeline](https://github.com/aminafara123/meeting-transcription-pipeline). It takes the finished transcripts (Whisper text, speaker labeled with pyannote) and exposes them as tools any MCP-capable AI client can call.
 
 The pipeline turns a recording into a long text file. Thats useful, but nobody rereads two hours of meeting. With this server a model can list the meetings, page through one, or search all of them for a topic and come back with the exact timestamp.
